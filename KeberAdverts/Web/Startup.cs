@@ -13,6 +13,7 @@ using ApplicationCore.Interfaces;
 using ApplicationCore;
 using ApplicationCore.Services;
 using Infrastructure.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace Web
 {
@@ -105,6 +106,22 @@ namespace Web
                 sb.Append("</tbody></table>");
                 await context.Response.WriteAsync(sb.ToString());
             }));
+        }
+
+        public void ConfigureDevelopment(IApplicationBuilder app,
+                                        IHostingEnvironment env,
+                                        ILoggerFactory loggerFactory,
+                                        UserManager<ApplicationUser> userManager,
+                                        ApplicationDbContext catalogContext)
+        {
+            Configure(app, env);
+
+            //Seed Data
+            ApplicationDbContextSeed.SeedAsync(app, catalogContext, loggerFactory)
+            .Wait();
+
+            var defaultUser = new ApplicationUser { UserName = "demouser@microsoft.com", Email = "demouser@microsoft.com" };
+            userManager.CreateAsync(defaultUser, "Pass@word1").Wait();
         }
     }
 }
