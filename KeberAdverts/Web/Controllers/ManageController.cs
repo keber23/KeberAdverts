@@ -10,7 +10,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Web.Interfaces;
-using Web.Models.ManageViewModels;
+using Web.ViewModels.Manage;
 using Web.Services;
 
 namespace Web.Controllers

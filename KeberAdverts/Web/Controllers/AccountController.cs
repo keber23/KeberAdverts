@@ -8,7 +8,7 @@ using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Web.Interfaces;
-using Web.Models.AccountViewModels;
+using Web.ViewModels.Account;
 using Web.Services;
 
 namespace Web.Controllers
